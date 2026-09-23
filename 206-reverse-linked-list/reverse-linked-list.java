@@ -8,17 +8,34 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+
+ //Iterative Approach
+ 
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+
+ //Iterative Approach
+ 
 class Solution {
     public ListNode reverseList(ListNode head) {
-        // Base case: empty list or single node
-        if (head == null || head.next == null) {
-            return head;
+        ListNode prev = null;
+        ListNode curr = head;
+
+        while (curr != null) {
+            ListNode nextTemp = curr.next; // Save next node
+            curr.next = prev;              // Reverse pointer
+            prev = curr;                   // Move prev forward
+            curr = nextTemp;              // Move curr forward
         }
 
-        ListNode newHead = reverseList(head.next);
-        head.next.next = head; // Reverse pointer
-        head.next = null;       // Break old link
-
-        return newHead;
+        return prev; // New head of reversed list
     }
 }
